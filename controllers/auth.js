@@ -3,9 +3,10 @@ const User = require("../models/User");
 
 exports.register = async (req, res, next) => {
     try{
-        const{name,email,password,role} = req.body;
+        const{name,tel,email,password,role} = req.body;
         const user = await User.create({
             name,
+            tel,
             email,
             password,
             role
@@ -16,7 +17,6 @@ exports.register = async (req, res, next) => {
         //     success: true,
         //     token
         // });
-        //
         sendTokenResponse(user, 200, res);
     } catch (error) {
         res.status(400).json({
@@ -27,9 +27,9 @@ exports.register = async (req, res, next) => {
     }
 };
 
-exports.login = async (req, res, next) => {  
-    const{email,password} = req.body;
-    if(!email || !password){
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
         return res.status(400).json({
             success: false,
             error: "Please provide email and password"
