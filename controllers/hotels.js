@@ -1,5 +1,5 @@
-const Booking = require('../models/Bookings');
-const Hotel = require('../models/Hotels');
+const Booking = require('../models/Booking');
+const Hotel = require('../models/Hotel');
 
 exports.getHotels = async (req, res, next) => {
     let query;
