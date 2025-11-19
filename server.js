@@ -3,15 +3,6 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser")
 
-//route files
-//const hospitals = require("./routes/hospitals");
-const auth = require("./routes/auth");
-//const appointments = require("./routes/appointments");
-const hotels = require("./routes/hotels");
-const bookings = require("./routes/bookings");
-const reviews = require('./routes/reviews');
-
-
 dotenv.config({ path: "./config/config.env" });
 
 connectDB();
@@ -21,6 +12,14 @@ const app = express();
 //ทำให้ใช้ lt gt lte gte in query ได้
 app.set('query parser', 'extended');
 
+
+//route files
+const auth = require("./routes/auth");
+const hotels = require("./routes/hotels");
+const bookings = require("./routes/bookings");
+const reviews = require('./routes/reviews');
+
+//mount routers
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/v1/hotels", hotels);

@@ -25,7 +25,6 @@ exports.getBookings = async (req,res,next) =>{
 };
 
 //get with id
-
 exports.getBooking = async(req,res,next) => {
     try{
         const booking = await Booking.findById(req.params.id).populate({path:'hotel', select:'name province tel'});
@@ -93,7 +92,7 @@ exports.deleteBooking = async (req,res,next) =>{
         if(req.user.role !== 'admin' && booking.user.toString() !== req.user.id){
             return res.status(401).json({success:false, msg:`the Booking id ${req.params.id} is not your booking`});
         }
-        booking = await booking.deleteOne();
+        await booking.deleteOne();
         res.status(200).json({success:true, data:{}});
     }catch(err){
         res.status(400).json({success:false, msg:err.message});
